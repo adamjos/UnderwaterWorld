@@ -5486,6 +5486,7 @@ GameObject:
   - component: {fileID: 873578847}
   - component: {fileID: 873578846}
   - component: {fileID: 873578850}
+  - component: {fileID: 873578851}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -5583,6 +5584,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &873578851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873578845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebda154cf753c0248bf7af095fd55315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5709,10 +5723,13 @@ MonoBehaviour:
   damage: 10
   range: 100
   impactForce: 30
+  fireRate: 15
   fpsCam: {fileID: 963194227}
   muzzleFlash: {fileID: 815177534}
   impactEffect: {fileID: 3548844382487857663, guid: d714f7a39f88d9b4b828ec43a1181180,
     type: 3}
+  playerController: {fileID: 0}
+  player: {fileID: 1467609611}
 --- !u!1 &1383916762
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,6 +5743,7 @@ GameObject:
   - component: {fileID: 1383916764}
   - component: {fileID: 1383916763}
   - component: {fileID: 1383916767}
+  - component: {fileID: 1383916768}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -5823,6 +5841,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1383916768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383916762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebda154cf753c0248bf7af095fd55315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &1467609609
 GameObject:
   m_ObjectHideFlags: 0
@@ -6051,7 +6082,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 5.7e-44, z: 4.36e-42, w: 5.9e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

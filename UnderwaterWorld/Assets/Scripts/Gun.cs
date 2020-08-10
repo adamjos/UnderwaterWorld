@@ -11,8 +11,16 @@ public class Gun : MonoBehaviour
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
+    public CharacterController playerController;
+    public Transform player;
 
     private float nextTimeToFire = 0f;
+
+    private void Start()
+    {
+        playerController = player.GetComponent<CharacterController>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -22,6 +30,12 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         } 
+
+        if (Input.GetButton("Fire2"))
+        {
+            HookShoot();
+        } 
+
 
     }
 
@@ -47,6 +61,22 @@ public class Gun : MonoBehaviour
 
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 2f);
+
+        }
+    }
+
+    void HookShoot ()
+    {
+        RaycastHit hookHit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hookHit, range))
+        {
+            Debug.Log("Hook hit " + hookHit.transform.name);
+
+            Target hookTarget = hookHit.transform.GetComponent<Target>();
+            if (hookTarget != null)
+            {
+                playerController.Move(hookHit.point - player.position);
+            }
         }
     }
 
