@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class Gun : MonoBehaviour
     public float range = 100f;
     public float impactForce = 30f;
     public float fireRate = 15f;
+    public float hookSpeed = 35f;
+    public float hookTime = 1f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -15,6 +19,7 @@ public class Gun : MonoBehaviour
     public Transform player;
 
     private float nextTimeToFire = 0f;
+
 
     private void Start()
     {
@@ -31,7 +36,7 @@ public class Gun : MonoBehaviour
             Shoot();
         } 
 
-        if (Input.GetButton("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             HookShoot();
         } 
@@ -68,6 +73,7 @@ public class Gun : MonoBehaviour
     void HookShoot ()
     {
         RaycastHit hookHit;
+
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hookHit, range))
         {
             Debug.Log("Hook hit " + hookHit.transform.name);
@@ -75,9 +81,26 @@ public class Gun : MonoBehaviour
             Target hookTarget = hookHit.transform.GetComponent<Target>();
             if (hookTarget != null)
             {
-                playerController.Move(hookHit.point - player.position);
+                StartCoroutine(SmoothLerp(hookTime, hookHit));
             }
         }
     }
+
+    private IEnumerator SmoothLerp (float time, RaycastHit hookHit)
+    {
+        Vector3 startPos = player.position;
+        Vector3 endPos = hookHit.point;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < time)
+        {
+            player.position = Vector3.Lerp(startPos, endPos, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+    }
+        
 
 }
