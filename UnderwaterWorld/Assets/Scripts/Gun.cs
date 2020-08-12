@@ -116,12 +116,6 @@ public class Gun : MonoBehaviour
 
         harpoonTransform.GetComponent<HarpoonPhysics>().Setup(shootDir);
 
-        //GameObject harpoon = Instantiate(harpoonPrefab) as GameObject;
-        //harpoon.transform.position = muzzleFlash.transform.position;
-        //harpoon.transform.rotation = muzzleFlash.transform.rotation;
-        //harpoon.transform.rotation = Quaternion.Euler(90f, muzzleFlash.transform.rotation.y, muzzleFlash.transform.rotation.z);
-        //Rigidbody rb = harpoon.GetComponent<Rigidbody>();
-        //rb.velocity = fpsCam.transform.forward * harpoonSpeed;
     }
 
 
