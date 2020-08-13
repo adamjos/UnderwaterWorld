@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMotor : MonoBehaviour
+public class PlayerWaterMovement : MonoBehaviour
 {
 
     Camera playerCamera;
     CharacterController playerController;
 
+ 
     public float moveDistance = 10f;
 
     // Start is called before the first frame update
@@ -35,4 +36,7 @@ public class PlayerMotor : MonoBehaviour
         if (Input.GetKey("space"))
             playerController.Move(new Vector3(0f, moveDistance * Time.deltaTime, 0f));
     }
+
+
+
 }
