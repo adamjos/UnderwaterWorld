@@ -33,4 +33,28 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    public void SwapToPlayerWaterMovementType()
+    {
+
+        if (playerMove.enabled)
+        {
+            playerMove.enabled = false;
+            playerWaterMove.enabled = true;
+        }
+
+    }
+
+    public void SwapToPlayerMovementType()
+    {
+
+        if (!playerMove.enabled)
+        {
+            playerMove.enabled = true;
+            playerWaterMove.enabled = false;
+        }
+
+    }
+
+
+
 }

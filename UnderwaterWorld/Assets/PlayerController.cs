@@ -18,12 +18,12 @@ public class PlayerController : MonoBehaviour
         playerWaterMove = player.GetComponent<PlayerWaterMovement>();
     }
 
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    /*
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("We hit something");
 
-        if (hit.gameObject.layer == waterMask)
+        if (other.gameObject.layer == waterMask)
         {
             SwapPlayerMovementType();
         }
@@ -42,5 +42,5 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    */
 }

@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             HarpoonShoot();
