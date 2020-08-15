@@ -5,29 +5,34 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
-    public float damage = 10f;
-    public float range = 100f;
-    public float impactForce = 30f;
-    public float fireRate = 0.5f;
+    public float damage = 10f; // Gun damage
+    public float range = 100f; // Gun range
+    public float impactForce = 30f; // Force applied to target
+    public float fireRate = 0.5f; // Shoots per seconds
+    private float nextTimeToFire = 0f; // Shooting cooldown 
 
-    public float hookSpeed = 35f;
-    public float hookTime = 1f;
-    public float finishDist = 1f;
+    public float hookTime = 1f; // Travel time with hook
+    public float finishDist = 1f; // Stopping distance from target
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
 
+
     public CharacterController playerController;
     public Transform player;
-    
-    private float nextTimeToFire = 0f;
+    public LineRenderer lineRenderer;
+    public float lineWidth = 0.05f;
 
-    [SerializeField] private Transform pfHarpoonPhysics;
+    [SerializeField] private Transform ProjectilePrefab;
 
     private void Start()
     {
         playerController = player.GetComponent<CharacterController>();
+        lineRenderer = player.GetComponent<LineRenderer>();
+        lineRenderer.startWidth = lineWidth;
+        lineRenderer.endWidth = lineWidth;
+        lineRenderer.sortingOrder = 1;
     }
 
     // Update is called once per frame
@@ -36,7 +41,7 @@ public class Gun : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            HarpoonShoot();
+            ProjectileShoot();
 
             //Shoot();
         } 
@@ -45,7 +50,10 @@ public class Gun : MonoBehaviour
         {
             HookShoot();
         } 
-
+        else
+        {
+            lineRenderer.enabled = false;
+        }
 
     }
 
@@ -101,20 +109,24 @@ public class Gun : MonoBehaviour
         while (elapsedTime < time)
         {
             player.position = Vector3.Lerp(startPos, endPos, (elapsedTime / time));
+            lineRenderer.enabled = true;
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, muzzleFlash.transform.position);
+            lineRenderer.SetPosition(1, hookHit.point);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
     }
         
-    void HarpoonShoot ()
+    void ProjectileShoot ()
     {
         Vector3 shootDir = fpsCam.transform.forward;
         Quaternion shootRot = fpsCam.transform.rotation * Quaternion.AngleAxis(90f, Vector3.right);
 
-        Transform harpoonTransform = Instantiate(pfHarpoonPhysics, muzzleFlash.transform.position, shootRot);
+        Transform harpoonTransform = Instantiate(ProjectilePrefab, muzzleFlash.transform.position, shootRot);
 
-        harpoonTransform.GetComponent<HarpoonPhysics>().Setup(shootDir);
+        harpoonTransform.GetComponent<ProjectilePhysics>().Setup(shootDir);
 
     }
 

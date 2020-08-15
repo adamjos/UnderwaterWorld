@@ -56,7 +56,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 move.y = waterHeight - transform.position.y;
             }
-            velocity.y = 0f;
+
+            velocity.y += 0.5f;
+            velocity.y = Mathf.Min(velocity.y, 0f);
         }
 
         controller.Move(move * speed * Time.deltaTime);
@@ -82,9 +84,10 @@ public class PlayerMovement : MonoBehaviour
         if (!isUnderwater)
         {
             velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
         }
-        
+
+        controller.Move(velocity * Time.deltaTime);
+
     }
 
     /*

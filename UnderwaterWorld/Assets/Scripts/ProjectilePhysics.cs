@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HarpoonPhysics : MonoBehaviour
+public class ProjectilePhysics : MonoBehaviour
 {
 
     public float moveSpeed = 25f;
