@@ -9,7 +9,7 @@ public class SurfaceControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerManager.instance.SwapToPlayerWaterMovementType();
+            //PlayerManager.instance.SwapToPlayerWaterMovementType();
         }
         
     }
@@ -18,7 +18,7 @@ public class SurfaceControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerManager.instance.SwapToPlayerMovementType();
+            //PlayerManager.instance.SwapToPlayerMovementType();
         }
         
     }
