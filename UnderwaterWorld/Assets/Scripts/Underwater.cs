@@ -19,7 +19,8 @@ public class Underwater : MonoBehaviour
     public Camera fpsCamera;
     public GameObject underwaterPostProcessGO;
     public GameObject normalPostProcessGO;
-    public GameObject normalDirectionalLight;
+    public GameObject mainLight;
+    public GameObject rimLight;
 
     private LightmapData[] lightmap_data;
 
@@ -33,8 +34,10 @@ public class Underwater : MonoBehaviour
         lightmap_data = LightmapSettings.lightmaps;
 
         normalColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-        underwaterColor = new Color(0.1177f, 0.1529f, 0.1843f, 1); // Darker
+        //underwaterColor = new Color(0.1177f, 0.1529f, 0.1843f, 1); // Darker
         //underwaterColor = new Color(0.3804f, 0.6285f, 0.8490f, 1); // Bright blue
+        underwaterColor = new Color(0.1657f, 0.3718f, 0.7169f, 1); // Bit darker blue
+
         normalAmbientLightColor = new Color(0.212f, 0.227f, 0.259f);
 
         skyboxMat = RenderSettings.skybox;
@@ -71,14 +74,16 @@ public class Underwater : MonoBehaviour
         // Disable lightmaps in scene by removing the lightmap data references
         LightmapSettings.lightmaps = new LightmapData[] { };
 
-        normalDirectionalLight.SetActive(false);
+        //mainLight.SetActive(false);
+        //rimLight.SetActive(false);
 
-        RenderSettings.fogColor = Color.black; //underwaterColor;
+        RenderSettings.fogColor = underwaterColor;
         RenderSettings.fogDensity = underwaterFogDensity;
         RenderSettings.skybox = null;
-        RenderSettings.ambientLight = Color.black;
+        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+        RenderSettings.ambientLight = underwaterColor;
 
-        fpsCamera.backgroundColor = Color.black; //underwaterColor;
+        fpsCamera.backgroundColor = underwaterColor;
         underwaterPostProcessGO.SetActive(true);
         normalPostProcessGO.SetActive(false);
     }
@@ -88,12 +93,14 @@ public class Underwater : MonoBehaviour
         // Reenable lightmap data in scene.
         LightmapSettings.lightmaps = lightmap_data;
 
-        normalDirectionalLight.SetActive(true);
+        //mainLight.SetActive(true);
+        //rimLight.SetActive(true);
 
         RenderSettings.fogColor = normalColor;
         RenderSettings.fogDensity = normalFogDensity;
         RenderSettings.ambientLight = normalAmbientLightColor;
         RenderSettings.skybox = skyboxMat;
+        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
 
         underwaterPostProcessGO.SetActive(false);
         normalPostProcessGO.SetActive(true);

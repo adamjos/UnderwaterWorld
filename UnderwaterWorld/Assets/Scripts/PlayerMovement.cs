@@ -90,16 +90,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    /*
-    private void OnEnable()
-    {
-        velocity.y = 7f;
-    }
-    */
-    private void OnDisable()
-    {
-        velocity.y = -2f;
-    }
-
 
 }
