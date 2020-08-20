@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
-    public float damage = 10f; // Gun damage
+    public int damage = 10; // Gun damage
     public float range = 100f; // Gun range
     public float impactForce = 30f; // Force applied to target
     public float fireRate = 0.5f; // Shoots per seconds
@@ -23,8 +23,7 @@ public class Gun : MonoBehaviour
     public Transform player;
     public LineRenderer lineRenderer;
     public float lineWidth = 0.05f;
-
-    [SerializeField] private Transform ProjectilePrefab;
+    public Transform ProjectilePrefab;
 
     private void Start()
     {
@@ -66,10 +65,17 @@ public class Gun : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
+            CharacterStats targetStats = hit.transform.GetComponent<CharacterStats>();
             Target target = hit.transform.GetComponent<Target>();
+
             if (target != null)
             {
                 target.TakeDamage(damage);
+            }
+
+            if (targetStats != null)
+            {
+                targetStats.TakeDamage(damage);
             }
 
             if (hit.rigidbody != null)
