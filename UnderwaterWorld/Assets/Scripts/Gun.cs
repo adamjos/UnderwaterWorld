@@ -11,31 +11,18 @@ public class Gun : MonoBehaviour
     public float fireRate = 0.5f; // Shoots per seconds
     public float upRecoil = 0f;
     public float sideRecoil = 0f;
-    public float hookTime = 1f; // Travel time with hook
-    public float finishDist = 1f; // Stopping distance from target
-    public float lineWidth = 0.05f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
     public AudioSource shootingSound;
-    public CharacterController playerController;
-    public Transform player;
-    public LineRenderer lineRenderer;
-    public Transform ProjectilePrefab;
 
     private float nextTimeToFire = 0f; // Shooting cooldown
-    private bool isHooking = false;
 
     private MouseLook mouseLook;
 
     private void Start()
     {
-        playerController = player.GetComponent<CharacterController>();
-        lineRenderer = player.GetComponent<LineRenderer>();
-        lineRenderer.startWidth = lineWidth;
-        lineRenderer.endWidth = lineWidth;
-        lineRenderer.sortingOrder = 1;
         shootingSound = GetComponent<AudioSource>();
         mouseLook = fpsCam.GetComponent<MouseLook>();
     }
@@ -46,19 +33,9 @@ public class Gun : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            //ProjectileShoot();
 
             Shoot();
         } 
-
-        if (Input.GetButtonDown("Fire2") && !isHooking)
-        {
-            HookShoot();
-        } 
-        else
-        {
-            lineRenderer.enabled = false;
-        }
 
     }
 
@@ -96,57 +73,5 @@ public class Gun : MonoBehaviour
 
         }
     }
-
-    void HookShoot ()
-    {
-
-        RaycastHit hookHit;
-
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hookHit, range))
-        {
-            Debug.Log("Hook hit " + hookHit.transform.name);
-
-            Target hookTarget = hookHit.transform.GetComponent<Target>();
-            if (hookTarget != null)
-            {
-                isHooking = true;
-                StartCoroutine(SmoothLerp(hookTime, hookHit));
-            }
-        }
-    }
-
-    private IEnumerator SmoothLerp (float time, RaycastHit hookHit)
-    {
-        Vector3 startPos = player.position;
-        Vector3 endPos = hookHit.point - (hookHit.point - player.position).normalized * finishDist;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < time)
-        {
-            player.position = Vector3.Lerp(startPos, endPos, (elapsedTime / time));
-            lineRenderer.enabled = true;
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, muzzleFlash.transform.position);
-            lineRenderer.SetPosition(1, hookHit.point);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        isHooking = false;
-
-    }
-        
-    void ProjectileShoot ()
-    {
-        Vector3 shootDir = fpsCam.transform.forward;
-        Quaternion shootRot = fpsCam.transform.rotation * Quaternion.AngleAxis(90f, Vector3.right);
-
-        Transform harpoonTransform = Instantiate(ProjectilePrefab, muzzleFlash.transform.position, shootRot);
-
-        harpoonTransform.GetComponent<ProjectilePhysics>().Setup(shootDir);
-
-    }
-
 
 }
