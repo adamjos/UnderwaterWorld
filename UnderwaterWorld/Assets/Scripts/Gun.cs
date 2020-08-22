@@ -9,21 +9,25 @@ public class Gun : MonoBehaviour
     public float range = 100f; // Gun range
     public float impactForce = 30f; // Force applied to target
     public float fireRate = 0.5f; // Shoots per seconds
-    private float nextTimeToFire = 0f; // Shooting cooldown 
-
+    public float upRecoil = 0f;
+    public float sideRecoil = 0f;
     public float hookTime = 1f; // Travel time with hook
     public float finishDist = 1f; // Stopping distance from target
+    public float lineWidth = 0.05f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
-
-
+    public AudioSource shootingSound;
     public CharacterController playerController;
     public Transform player;
     public LineRenderer lineRenderer;
-    public float lineWidth = 0.05f;
     public Transform ProjectilePrefab;
+
+    private float nextTimeToFire = 0f; // Shooting cooldown
+    private bool isHooking = false;
+
+    private MouseLook mouseLook;
 
     private void Start()
     {
@@ -32,6 +36,8 @@ public class Gun : MonoBehaviour
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
         lineRenderer.sortingOrder = 1;
+        shootingSound = GetComponent<AudioSource>();
+        mouseLook = fpsCam.GetComponent<MouseLook>();
     }
 
     // Update is called once per frame
@@ -45,7 +51,7 @@ public class Gun : MonoBehaviour
             Shoot();
         } 
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && !isHooking)
         {
             HookShoot();
         } 
@@ -59,6 +65,8 @@ public class Gun : MonoBehaviour
     void Shoot ()
     {
         muzzleFlash.Play();
+        shootingSound.Play();
+        mouseLook.AddRecoil(upRecoil / 5f, sideRecoil / 5f);
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -91,6 +99,7 @@ public class Gun : MonoBehaviour
 
     void HookShoot ()
     {
+
         RaycastHit hookHit;
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hookHit, range))
@@ -100,6 +109,7 @@ public class Gun : MonoBehaviour
             Target hookTarget = hookHit.transform.GetComponent<Target>();
             if (hookTarget != null)
             {
+                isHooking = true;
                 StartCoroutine(SmoothLerp(hookTime, hookHit));
             }
         }
@@ -122,6 +132,8 @@ public class Gun : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        isHooking = false;
 
     }
         
