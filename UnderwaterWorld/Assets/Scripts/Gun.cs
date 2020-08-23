@@ -41,6 +41,7 @@ public class Gun : MonoBehaviour
         shootingSound = GetComponents<AudioSource>()[0];
         reloadSound = GetComponents<AudioSource>()[1];
         mouseLook = fpsCam.GetComponent<MouseLook>();
+        normalFOV = fpsCam.fieldOfView;
     }
 
     private void OnEnable()
