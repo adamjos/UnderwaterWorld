@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
             return;
         }
 
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
         {
             if (scopeOverlay != null)
             {
@@ -67,6 +67,7 @@ public class Gun : MonoBehaviour
             StartCoroutine(Reload());
             return;
         }
+
 
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {

@@ -22,6 +22,13 @@ public class AmmoIndicator : MonoBehaviour
     void Update()
     {
         selectedWeapon = weaponHolder.GetChild(weaponSwitching.selectedWeapon);
-        ammoText.text = string.Join("/", selectedWeapon.GetComponent<Gun>().GetCurrentAmmo(), selectedWeapon.GetComponent<Gun>().maxAmmo);
+        if (selectedWeapon.GetComponent<Gun>() != null)
+        {
+            ammoText.text = string.Join("/", selectedWeapon.GetComponent<Gun>().GetCurrentAmmo(), selectedWeapon.GetComponent<Gun>().maxAmmo);
+        } else
+        {
+            ammoText.text = string.Join("/", "-", "-");
+        }
+        
     }
 }
