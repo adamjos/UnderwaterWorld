@@ -3582,7 +3582,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 27a8142a71addc145960b12202be8c86, type: 3}
+    m_Font: {fileID: 12800000, guid: 3c8b02630cb7d674094d6ccec87ecff4, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -5916,6 +5916,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4503640828876737413, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 8477211288868742511, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -6059,7 +6064,7 @@ PrefabInstance:
     - target: {fileID: 8481473686871280678, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
         type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8481473687505851111, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
         type: 3}
@@ -6101,6 +6106,11 @@ PrefabInstance:
       propertyPath: rimLight
       value: 
       objectReference: {fileID: 744361993}
+    - target: {fileID: 8481473687509914459, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
+        type: 3}
+      propertyPath: depthIndicator
+      value: 
+      objectReference: {fileID: 382652409}
     - target: {fileID: 8481473687509914460, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
         type: 3}
       propertyPath: m_Name

@@ -186,14 +186,14 @@ MonoBehaviour:
   range: 250
   impactForce: 30
   fireRate: 9
-  maxAmmo: 10
-  reloadTime: 1
+  maxAmmo: 20
+  reloadTime: 2
   animator: {fileID: 0}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 0}
   scopedFOV: 15
-  upRecoil: 2
-  sideRecoil: 1
+  upRecoil: 1
+  sideRecoil: 0.2
   fpsCam: {fileID: 8481473686871280678}
   muzzleFlash: {fileID: 8481473686979133035}
   impactEffect: {fileID: 3548844382487857663, guid: d714f7a39f88d9b4b828ec43a1181180,
@@ -312,8 +312,8 @@ MonoBehaviour:
   range: 500
   impactForce: 50
   fireRate: 1
-  maxAmmo: 10
-  reloadTime: 1
+  maxAmmo: 6
+  reloadTime: 2
   animator: {fileID: 0}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 3706237189860274855}
@@ -648,15 +648,15 @@ MonoBehaviour:
   damage: 5
   range: 100
   impactForce: 20
-  fireRate: 2
-  maxAmmo: 10
-  reloadTime: 1
+  fireRate: 20
+  maxAmmo: 15
+  reloadTime: 2
   animator: {fileID: 0}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 0}
   scopedFOV: 15
-  upRecoil: 1
-  sideRecoil: 0.2
+  upRecoil: 0
+  sideRecoil: 0
   fpsCam: {fileID: 8481473686871280678}
   muzzleFlash: {fileID: 8152881360234129785}
   impactEffect: {fileID: 3548844382487857663, guid: d714f7a39f88d9b4b828ec43a1181180,
@@ -869,6 +869,7 @@ MonoBehaviour:
   normalPostProcessGO: {fileID: 0}
   mainLight: {fileID: 0}
   rimLight: {fileID: 0}
+  depthIndicator: {fileID: 0}
 --- !u!120 &8481473687509914457
 LineRenderer:
   m_ObjectHideFlags: 0

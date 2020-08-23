@@ -22,6 +22,8 @@ public class Underwater : MonoBehaviour
     public GameObject mainLight;
     public GameObject rimLight;
 
+    public GameObject depthIndicator;
+
     private LightmapData[] lightmap_data;
 
     private Material skyboxMat;
@@ -86,6 +88,8 @@ public class Underwater : MonoBehaviour
         fpsCamera.backgroundColor = underwaterColor;
         underwaterPostProcessGO.SetActive(true);
         normalPostProcessGO.SetActive(false);
+
+        depthIndicator.SetActive(true);
     }
 
     void SetNormal ()
@@ -104,6 +108,8 @@ public class Underwater : MonoBehaviour
 
         underwaterPostProcessGO.SetActive(false);
         normalPostProcessGO.SetActive(true);
+
+        depthIndicator.SetActive(false);
     }
 
     public bool IsUnderwater ()

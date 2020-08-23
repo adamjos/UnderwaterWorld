@@ -63,6 +63,7 @@ public class Gun : MonoBehaviour
             {
                 OnUnscoped();
             }
+            animator.SetBool("Aiming", false);
             animator.SetBool("Shooting", false);
             StartCoroutine(Reload());
             return;
@@ -133,9 +134,13 @@ public class Gun : MonoBehaviour
 
         currentAmmo = maxAmmo;
         isReloading = false;
-        if (scopeOverlay != null && Input.GetButton("Fire2"))
+        if (Input.GetButton("Fire2"))
         {
-            StartCoroutine(OnScoped());
+            animator.SetBool("Aiming", true);
+            if (scopeOverlay != null)
+            {
+                StartCoroutine(OnScoped());
+            }
         }
     }
 
