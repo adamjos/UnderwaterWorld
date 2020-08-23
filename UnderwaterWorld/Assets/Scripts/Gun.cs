@@ -59,6 +59,11 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <= 0)
         {
+            if (scopeOverlay != null)
+            {
+                OnUnscoped();
+            }
+            animator.SetBool("Shooting", false);
             StartCoroutine(Reload());
             return;
         }
@@ -68,6 +73,9 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
 
             Shoot();
+        } else //if (Input.GetButtonUp("Fire1"))
+        {
+            animator.SetBool("Shooting", false);
         }
         
         if (Input.GetButtonDown("Fire2"))
@@ -124,12 +132,17 @@ public class Gun : MonoBehaviour
 
         currentAmmo = maxAmmo;
         isReloading = false;
+        if (scopeOverlay != null && Input.GetButton("Fire2"))
+        {
+            StartCoroutine(OnScoped());
+        }
     }
 
     void Shoot ()
     {
         muzzleFlash.Play();
         shootingSound.Play();
+        animator.SetBool("Shooting", true);
         mouseLook.AddRecoil(upRecoil / 5f, sideRecoil / 5f);
         currentAmmo--;
 
@@ -160,6 +173,11 @@ public class Gun : MonoBehaviour
             Destroy(impactGO, 2f);
 
         }
+    }
+
+    public int GetCurrentAmmo ()
+    {
+        return currentAmmo;
     }
 
 }
