@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     public Animator animator;
     public GameObject scopeOverlay;
     public GameObject weaponCamera;
+    public GameObject crosshair;
 
     public float scopedFOV = 15f;
     private float normalFOV;
@@ -107,6 +108,7 @@ public class Gun : MonoBehaviour
     {
         scopeOverlay.SetActive(false);
         weaponCamera.SetActive(true);
+        crosshair.SetActive(true);
 
         fpsCam.fieldOfView = normalFOV;
     }
@@ -116,6 +118,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         scopeOverlay.SetActive(true);
         weaponCamera.SetActive(false);
+        crosshair.SetActive(false);
 
         normalFOV = fpsCam.fieldOfView;
         fpsCam.fieldOfView = scopedFOV;
