@@ -90,7 +90,7 @@ public class Gun : MonoBehaviour
                 StartCoroutine(OnScoped());
             }
 
-        } else if (Input.GetButtonUp("Fire2"))
+        } else if (!Input.GetButton("Fire2"))
         {
             animator.SetBool("Aiming", false);
 

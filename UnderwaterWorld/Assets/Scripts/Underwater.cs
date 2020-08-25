@@ -38,7 +38,8 @@ public class Underwater : MonoBehaviour
         normalColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
         //underwaterColor = new Color(0.1177f, 0.1529f, 0.1843f, 1); // Darker
         //underwaterColor = new Color(0.3804f, 0.6285f, 0.8490f, 1); // Bright blue
-        underwaterColor = new Color(0.1657f, 0.3718f, 0.7169f, 1); // Bit darker blue
+        //underwaterColor = new Color(0.1657f, 0.3718f, 0.7169f, 1); // Bit darker blue
+        underwaterColor = Color.black; // Bit darker blue
 
         normalAmbientLightColor = new Color(0.212f, 0.227f, 0.259f);
 

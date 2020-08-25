@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = PlayerManager.instance.transform;
+        target = PlayerManager.instance.player.transform;
         rb = GetComponent<Rigidbody>();
         combat = GetComponent<CharacterCombat>();
         targetStats = target.GetComponent<CharacterStats>();
