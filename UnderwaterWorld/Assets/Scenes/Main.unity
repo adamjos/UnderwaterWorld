@@ -6576,6 +6576,11 @@ PrefabInstance:
       propertyPath: scopeOverlay
       value: 
       objectReference: {fileID: 823908599}
+    - target: {fileID: 8481473687505851111, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
+        type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 395430720}
     - target: {fileID: 8481473687509914459, guid: bbe54cf97cdf11141b7c92dc7ae8a0d7,
         type: 3}
       propertyPath: normalPostProcessGO
