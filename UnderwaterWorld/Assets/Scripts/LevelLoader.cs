@@ -18,6 +18,7 @@ public class LevelLoader : MonoBehaviour
         } else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
