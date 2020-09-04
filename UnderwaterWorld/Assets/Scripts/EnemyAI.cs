@@ -18,11 +18,13 @@ public class EnemyAI : MonoBehaviour
     Rigidbody rb;
     CharacterCombat combat;
     CharacterStats targetStats;
+    Underwater underwater;
 
     // Start is called before the first frame update
     void Start()
     {
         target = PlayerManager.instance.player.transform;
+        underwater = target.GetComponent<Underwater>();
         rb = GetComponent<Rigidbody>();
         combat = GetComponent<CharacterCombat>();
         targetStats = target.GetComponent<CharacterStats>();
@@ -40,7 +42,17 @@ public class EnemyAI : MonoBehaviour
 
             Quaternion lookRot = Quaternion.LookRotation(directionToTarget, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 10f));
-            rb.AddForce(directionToTarget * speed * Time.deltaTime);
+            if (transform.position.y < (underwater.waterHeight - 1f))
+            {
+                rb.AddForce(directionToTarget * speed * Time.deltaTime);
+            } else
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                directionToTarget = new Vector3(directionToTarget.x, Mathf.Min(directionToTarget.y, 0), directionToTarget.z);
+                rb.AddForce(directionToTarget * speed * Time.deltaTime);
+            }
+
+            
 
             if (distanceToTarget < stoppingDistance)
             {
@@ -50,6 +62,8 @@ public class EnemyAI : MonoBehaviour
                 
         }
     }
+
+
             
 }
 

@@ -15,6 +15,11 @@ public class Flashlight : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.F) && !isTurnedOn)
         {
             flashlight.enabled = true;

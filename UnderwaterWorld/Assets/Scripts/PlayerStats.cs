@@ -8,6 +8,7 @@ public class PlayerStats : CharacterStats
     public override void Die()
     {
         base.Die();
+        AudioManager.instance.Play("PlayerDeath");
         PlayerManager.instance.KillPlayer();
     }
 }

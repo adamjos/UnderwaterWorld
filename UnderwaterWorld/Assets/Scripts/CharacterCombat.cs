@@ -12,6 +12,7 @@ public class CharacterCombat : MonoBehaviour
     public float attackDelay = 0.6f;
 
     public event System.Action OnAttack;
+    public event System.Action OnFinishedAttack;
 
     private CharacterStats myStats;
 
@@ -47,5 +48,10 @@ public class CharacterCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.damage);
+
+        if (OnFinishedAttack != null)
+        {
+            OnFinishedAttack();
+        }
     }
 }
