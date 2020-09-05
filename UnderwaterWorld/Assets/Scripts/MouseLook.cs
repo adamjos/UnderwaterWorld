@@ -24,6 +24,11 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DialogueManager.instance.isInDialogue)
+        {
+            return;
+        }
+
         // Multiply with delta time so that look around speed becomes independent of frame rate 
         float mouseX = sideRecoil + Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = upRecoil + Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

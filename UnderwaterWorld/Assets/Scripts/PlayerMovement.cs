@@ -43,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        if (DialogueManager.instance.isInDialogue)
+        {
+            return;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

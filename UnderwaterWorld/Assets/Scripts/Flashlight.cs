@@ -15,7 +15,7 @@ public class Flashlight : MonoBehaviour
 
     private void Update()
     {
-        if (PauseMenu.GameIsPaused)
+        if (PauseMenu.GameIsPaused || DialogueManager.instance.isInDialogue)
         {
             return;
         }
