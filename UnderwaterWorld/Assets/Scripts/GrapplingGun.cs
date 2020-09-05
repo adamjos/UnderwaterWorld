@@ -68,7 +68,7 @@ public class GrapplingGun : MonoBehaviour
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < time)
+        while (Input.GetButton("Fire1"))
         {
             player.position = Vector3.Lerp(startPos, endPos, (elapsedTime / time));
             lineRenderer.enabled = true;
@@ -82,7 +82,5 @@ public class GrapplingGun : MonoBehaviour
         isGrappling = false;
 
     }
-
-
 
 }
