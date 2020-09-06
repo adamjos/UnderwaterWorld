@@ -16,7 +16,14 @@ public class GrapplingGun : MonoBehaviour
     public Transform player;
     public LineRenderer lineRenderer;
 
+    public Rigidbody cubeRb;
+
+    private ImpactReceiver impactReceiver;
+
     private bool isGrappling = false;
+
+    private float travelTime = 1f;
+    private float gravity = -9.82f * 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +33,7 @@ public class GrapplingGun : MonoBehaviour
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
         lineRenderer.sortingOrder = 2;
+        impactReceiver = player.GetComponent<ImpactReceiver>();
     }
 
     // Update is called once per frame
@@ -38,6 +46,11 @@ public class GrapplingGun : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            PowerJump();
         }
 
     }
@@ -83,4 +96,27 @@ public class GrapplingGun : MonoBehaviour
 
     }
 
+    private void PowerJump ()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        {
+            Debug.Log("hit " + hit.transform.name);
+
+            Target target = hit.transform.GetComponent<Target>();
+
+            if (target != null)
+            {
+                Vector3 displacement = hit.point - cubeRb.transform.position;
+                Vector3 gravity3d = new Vector3(0f, gravity, 0f);
+                Vector3 velocity = (displacement - gravity3d * travelTime * travelTime) / (2f * travelTime);
+                Debug.Log(velocity);
+                cubeRb.velocity = velocity;
+                //Vector3 impactForce = velocity * impactReceiver.mass / Time.deltaTime;
+                //impactReceiver.AddImpact(impactForce);
+            }
+        }
+
+    }
 }
