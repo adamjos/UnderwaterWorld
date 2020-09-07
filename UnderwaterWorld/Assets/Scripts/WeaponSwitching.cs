@@ -23,7 +23,7 @@ public class WeaponSwitching : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (selectedWeapon >= transform.childCount - 1)
+            if (selectedWeapon >= ItemManager.instance.WeaponInventory.Count - 1)
             {
                 selectedWeapon = 0;
             } else
@@ -36,31 +36,31 @@ public class WeaponSwitching : MonoBehaviour
         {
             if (selectedWeapon <= 0)
             {
-                selectedWeapon = transform.childCount - 1;
+                selectedWeapon = ItemManager.instance.WeaponInventory.Count - 1;
             } else
             {
                 selectedWeapon--;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && ItemManager.instance.pickedUpItems[1])
         {
-            selectedWeapon = 0;
+            selectedWeapon = 1; // Grappling gun
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 3 && ItemManager.instance.pickedUpItems[2])
         {
-            selectedWeapon = 1;
+            selectedWeapon = 2; // Pistol
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 4 && ItemManager.instance.pickedUpItems[3])
         {
-            selectedWeapon = 2;
+            selectedWeapon = 3; // Rifle
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 5 && ItemManager.instance.pickedUpItems[4])
         {
-            selectedWeapon = 3;
+            selectedWeapon = 4; // Sniper rifle
         }
 
 
@@ -87,4 +87,5 @@ public class WeaponSwitching : MonoBehaviour
         }
 
     }
+
 }
