@@ -48,6 +48,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (Input.GetKey(KeyCode.R))
+        {
+            Time.timeScale = 0.25f;
+        } else
+        {
+            Time.timeScale = 1f;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

@@ -104,6 +104,9 @@ public class WeaponSwitching : MonoBehaviour
     {
         cachedWeaponInventory = ItemManager.instance.WeaponInventory;
         cachedPickedUpItems = ItemManager.instance.pickedUpItems;
+        selectedWeapon = ItemManager.instance.newItem;
+        scrollIndex = cachedWeaponInventory.IndexOf(selectedWeapon);
+        SelectWeapon();
     }
 
 }

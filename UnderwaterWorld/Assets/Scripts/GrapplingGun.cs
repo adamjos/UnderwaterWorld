@@ -83,6 +83,8 @@ public class GrapplingGun : MonoBehaviour
 
         while (Input.GetButton("Fire1"))
         {
+            //Rigidbody rb = player.transform.GetComponent<Rigidbody>();
+            //rb.AddForce((endPos - startPos).normalized * 10f, ForceMode.VelocityChange);
             player.position = Vector3.Lerp(startPos, endPos, (elapsedTime / time));
             lineRenderer.enabled = true;
             lineRenderer.positionCount = 2;
@@ -108,13 +110,13 @@ public class GrapplingGun : MonoBehaviour
 
             if (target != null)
             {
-                Vector3 displacement = hit.point - cubeRb.transform.position;
+                Vector3 displacement = hit.point - player.transform.position;//cubeRb.transform.position;
                 Vector3 gravity3d = new Vector3(0f, gravity, 0f);
                 Vector3 velocity = (displacement - gravity3d * travelTime * travelTime) / (2f * travelTime);
                 Debug.Log(velocity);
-                cubeRb.velocity = velocity;
-                //Vector3 impactForce = velocity * impactReceiver.mass / Time.deltaTime;
-                //impactReceiver.AddImpact(impactForce);
+                //cubeRb.velocity = velocity;
+                Vector3 impactForce = 10f * velocity * impactReceiver.mass;
+                impactReceiver.AddImpact(impactForce);
             }
         }
 

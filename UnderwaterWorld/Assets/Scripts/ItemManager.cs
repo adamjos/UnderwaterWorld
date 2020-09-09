@@ -30,6 +30,8 @@ public class ItemManager : MonoBehaviour
 
     public event System.Action OnPickedUpItem;
 
+    public int newItem = 0;
+
     private void Start()
     {
         // Always include 0, which corresponds to unarmed
@@ -45,6 +47,7 @@ public class ItemManager : MonoBehaviour
             pickedUpItems[slotID] = true;
             WeaponInventory.Add(slotID);
             WeaponInventory.Sort();
+            newItem = slotID;
 
             if (OnPickedUpItem != null)
             {
