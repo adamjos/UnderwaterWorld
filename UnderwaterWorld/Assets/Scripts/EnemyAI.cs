@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
 {
 
     public Transform target;
+    public Transform rangeCheck;
 
     public float speed = 2f;
     public float nextWaypointDistance = 3f;
@@ -34,7 +35,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        float distanceToTarget = Vector3.Distance(rangeCheck.position, target.position);
 
         if ((distanceToTarget < followDistance))
         {
